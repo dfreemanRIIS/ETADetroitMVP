@@ -35,13 +35,14 @@ public class CompanyActivity extends Activity implements CompanyView {
     private BusCompany mBusCompany;
     private int defaultColor;
     private Cursor allRoutes;
+    private ListView mList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company);
 
-        ListView mList = (ListView) findViewById(R.id.list);
+        mList = (ListView) findViewById(R.id.list);
         BusCompanyData busCompanyData = new BusCompanyData(this);
         mBusCompany = busCompanyData.placeList().get(getIntent().getIntExtra(EXTRA_PARAM_ID, 0));
         mImageView = (ImageView) findViewById(R.id.placeImage);
@@ -51,24 +52,7 @@ public class CompanyActivity extends Activity implements CompanyView {
         defaultColor = getResources().getColor(R.color.primary_dark);
         mRevealView.setVisibility(View.INVISIBLE);
 
-        //Get info from Presenter
-        CompanyPresenter presenter = new CompanyPresenter();
-        allRoutes = presenter.getAllRoute(mBusCompany.name, this);
-
-        CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
-
-        mList.setAdapter(listAdapter);
-        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (allRoutes.moveToPosition(position)) {
-                    Intent intent = new Intent(CompanyActivity.this, RouteDetailActivity.class);
-                    intent.putExtra(RouteDetailActivity.EXTRA_ROUTE_NAME, allRoutes.getString(1));
-                    startActivity(intent);
-                }
-            }
-        });
+        getAllRoutes();
 
         loadPlace();
         windowTransition();
@@ -109,5 +93,26 @@ public class CompanyActivity extends Activity implements CompanyView {
     public void onBackPressed() {
         Intent intent = new Intent(CompanyActivity.this, MainActivity.class);
         startActivity(intent);
+    }
+
+    public void getAllRoutes() {
+        CompanyPresenter presenter = new CompanyPresenter();
+        allRoutes = presenter.getAllRoute(mBusCompany.name, this);
+
+        CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
+
+        mList.setAdapter(listAdapter);
+        mList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                if (allRoutes.moveToPosition(position)) {
+                    Intent intent = new Intent(CompanyActivity.this, RouteDetailActivity.class);
+                    intent.putExtra(RouteDetailActivity.EXTRA_ROUTE_NAME, allRoutes.getString(1));
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 }
