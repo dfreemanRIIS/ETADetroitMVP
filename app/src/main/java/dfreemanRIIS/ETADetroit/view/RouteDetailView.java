@@ -9,9 +9,9 @@ import android.widget.TextView;
 import android.database.Cursor;
 
 import dfreemanRIIS.ETADetroit.R;
-import dfreemanRIIS.ETADetroit.controller.Controller;
+import dfreemanRIIS.ETADetroit.presenter.RouteDetailPresenter;
 
-public class RouteDetailActivity extends Activity {
+public class RouteDetailView extends Activity {
 
     public static final String EXTRA_ROUTE_NAME = "route_name";
 
@@ -20,10 +20,10 @@ public class RouteDetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
 
-        //Get info from controller
-        Controller controller = new Controller();
+        //Get info from Presenter
+        RouteDetailPresenter presenter = new RouteDetailPresenter();
         String thisRoute = (String)getIntent().getExtras().get(EXTRA_ROUTE_NAME);
-        Cursor details = controller.getRouteDetails(thisRoute, this);
+        Cursor details = presenter.getRouteDetails(thisRoute, this);
 
         if(details.moveToFirst()) {
             TextView textView1 = (TextView)findViewById(R.id.listDetails);
@@ -36,7 +36,7 @@ public class RouteDetailActivity extends Activity {
             textView1.setText(placeHolder1);
         }
 
-		Cursor stops = controller.getRouteStops(details.getString(3), this);
+		Cursor stops = presenter.getRouteStops(details.getString(3), this);
         CursorAdapter listAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1,
                 stops,

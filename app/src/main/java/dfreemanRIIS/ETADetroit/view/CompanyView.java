@@ -20,11 +20,11 @@ import android.widget.TextView;
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.adapters.TodoCursorAdapter;
 import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
-import dfreemanRIIS.ETADetroit.controller.Controller;
+import dfreemanRIIS.ETADetroit.presenter.CompanyPresenter;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
 
-public class CompanyActivity extends Activity {
+public class CompanyView extends Activity {
 
     public static final String EXTRA_PARAM_ID = "place_id";
     private ImageView mImageView;
@@ -50,9 +50,9 @@ public class CompanyActivity extends Activity {
         defaultColor = getResources().getColor(R.color.primary_dark);
         mRevealView.setVisibility(View.INVISIBLE);
 
-        //Get info from controller
-        Controller controller = new Controller();
-        allRoutes = controller.getAllRoute(mBusCompany.name, this);
+        //Get info from Presenter
+        CompanyPresenter presenter = new CompanyPresenter();
+        allRoutes = presenter.getAllRoute(mBusCompany.name, this);
 
         CursorAdapter listAdapter = new TodoCursorAdapter(this, allRoutes);
 
@@ -62,8 +62,8 @@ public class CompanyActivity extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 if (allRoutes.moveToPosition(position)) {
-                    Intent intent = new Intent(CompanyActivity.this, RouteDetailActivity.class);
-                    intent.putExtra(RouteDetailActivity.EXTRA_ROUTE_NAME, allRoutes.getString(1));
+                    Intent intent = new Intent(CompanyView.this, RouteDetailView.class);
+                    intent.putExtra(RouteDetailView.EXTRA_ROUTE_NAME, allRoutes.getString(1));
                     startActivity(intent);
                 }
             }
@@ -106,7 +106,7 @@ public class CompanyActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(CompanyActivity.this, MainActivity.class);
+        Intent intent = new Intent(CompanyView.this, MainView.class);
         startActivity(intent);
     }
 }
