@@ -21,7 +21,10 @@ public class RouteDetailActivity extends Activity implements RouteDetailView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route_detail);
 
-        //Get info from Presenter
+        setup();
+    }
+
+    public void setup() {
         RouteDetailPresenter presenter = new RouteDetailPresenter();
         String thisRoute = (String)getIntent().getExtras().get(EXTRA_ROUTE_NAME);
         Cursor details = presenter.getRouteDetails(thisRoute, this);
@@ -37,7 +40,7 @@ public class RouteDetailActivity extends Activity implements RouteDetailView {
             textView1.setText(placeHolder1);
         }
 
-		Cursor stops = presenter.getRouteStops(details.getString(3), this);
+        Cursor stops = presenter.getRouteStops(details.getString(3), this);
         CursorAdapter listAdapter = new SimpleCursorAdapter(this,
                 android.R.layout.simple_list_item_1,
                 stops,
