@@ -19,9 +19,8 @@ import android.widget.Toolbar;
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.adapters.TravelListAdapter;
-import dfreemanRIIS.ETADetroit.view.MainView;
 
-public class MainActivity extends Activity implements MainView {
+public class MainActivity extends Activity {
 
     private Menu menu;
     private boolean isListView;
