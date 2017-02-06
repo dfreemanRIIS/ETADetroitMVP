@@ -10,8 +10,9 @@ import android.database.Cursor;
 
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.presenter.RouteDetailPresenter;
+import dfreemanRIIS.ETADetroit.view.RouteDetailView;
 
-public class RouteDetailActivity extends Activity {
+public class RouteDetailActivity extends Activity implements RouteDetailView {
 
     public static final String EXTRA_ROUTE_NAME = "route_name";
 

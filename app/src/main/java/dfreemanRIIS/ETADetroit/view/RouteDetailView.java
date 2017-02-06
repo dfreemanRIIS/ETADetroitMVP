@@ -1,4 +1,4 @@
 package dfreemanRIIS.ETADetroit.view;
 
-public interface CompanyView {
+public interface RouteDetailView {
 }

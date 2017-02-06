@@ -23,8 +23,9 @@ import dfreemanRIIS.ETADetroit.adapters.TransitionAdapter;
 import dfreemanRIIS.ETADetroit.presenter.CompanyPresenter;
 import dfreemanRIIS.ETADetroit.model.BusCompany;
 import dfreemanRIIS.ETADetroit.model.BusCompanyData;
+import dfreemanRIIS.ETADetroit.view.CompanyView;
 
-public class CompanyActivity extends Activity {
+public class CompanyActivity extends Activity implements CompanyView {
 
     public static final String EXTRA_PARAM_ID = "place_id";
     private ImageView mImageView;
