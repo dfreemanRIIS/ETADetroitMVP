@@ -1,4 +1,4 @@
-package dfreemanRIIS.ETADetroit.acitivity;
+package dfreemanRIIS.ETADetroit.view;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.database.Cursor;
 import dfreemanRIIS.ETADetroit.R;
 import dfreemanRIIS.ETADetroit.presenter.RouteDetailPresenter;
 
-public class RouteDetailActivity extends Activity {
+public class RouteDetailView extends Activity {
 
     public static final String EXTRA_ROUTE_NAME = "route_name";
 
