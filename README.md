@@ -9,3 +9,7 @@ https://github.com/dfreemanRIIS/ETADetroitMVC
 
 MVVM version here:
 https://github.com/dfreemanRIIS/ETADetroitMVVM
+
+
+Clean version here:
+https://github.com/dfreemanRIIS/ETADetroitClean
